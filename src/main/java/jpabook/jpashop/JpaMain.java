@@ -1,12 +1,10 @@
 package jpabook.jpashop;
 
-import jpabook.jpashop.domain.Book;
-import jpabook.jpashop.domain.Item;
+import jpabook.jpashop.domain.*;
 
-import javax.persistence.EntityManager;
-import javax.persistence.EntityManagerFactory;
-import javax.persistence.EntityTransaction;
-import javax.persistence.Persistence;
+import javax.persistence.*;
+import java.time.LocalDateTime;
+import java.util.List;
 
 public class JpaMain {
 
@@ -22,10 +20,23 @@ public class JpaMain {
         try {
 
             Book book = new Book();
-            book.setName("JPA");
-            book.setAuthor("김");
+            book.setIsbn("JPA2");
+            book.setAuthor("kim2");
 
             em.persist(book);
+
+            Movie movie = new Movie();
+            movie.setDirector("didid");
+            movie.setActor("aa");
+            movie.setName("sdfsdf");
+            movie.setPrice(100);
+            em.persist(movie);
+
+            em.flush();
+            em.close();
+
+            List<Item> s = em.createQuery("select m from Item m", Item.class)
+                    .getResultList();
 
             tx.commit();
         } catch (Exception e) {

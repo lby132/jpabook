@@ -8,13 +8,13 @@ import java.util.List;
 
 @Entity
 @Data
-@Inheritance(strategy = InheritanceType.SINGLE_TABLE)
+@Inheritance(strategy = InheritanceType.TABLE_PER_CLASS)
 @DiscriminatorColumn
 public abstract class Item extends BaseEntity {
 
     @Id
     @GeneratedValue
-    @Column(name = "ITEM_ID")
+    @Column(name = "ITEM_ID2")
     private Long id;
 
     private String name;
@@ -23,8 +23,5 @@ public abstract class Item extends BaseEntity {
 
     @ManyToMany(mappedBy = "items")
     private List<Category> categories = new ArrayList<>();
-
-
-
 
 }
